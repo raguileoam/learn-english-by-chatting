@@ -4,7 +4,7 @@ import { api } from "../utils/api";
 
 export default function Message() {
   const [error, setError] = useState("");
-  const [showComponent, setShowComponent] = useState(false);
+  const [showResponseMessages, setShowResponseMessage] = useState(false);
   const [messageInput, setMessageInput] = useState("");
   const [messageSend, setMessageSend] = useState("");
   const correctEnglishMutation = api.generateText.correctEnglish.useMutation();
@@ -16,7 +16,7 @@ export default function Message() {
       return;
     }
     setMessageSend(messageInput);
-    setShowComponent(true);
+    setShowResponseMessage(true);
     setMessageInput("");
     correctEnglishMutation.mutate({
       text: messageInput,
@@ -58,7 +58,7 @@ export default function Message() {
           </div>
           <div
             className="chat-message"
-            style={showComponent ? {} : { display: "none" }}
+            style={showResponseMessages ? {} : { display: "none" }}
           >
             <div className="flex items-end justify-end">
               <div className="order-1 mx-2 flex max-w-xs flex-col items-end space-y-2 text-xs">
@@ -73,7 +73,7 @@ export default function Message() {
         </div>
         <div
           className="chat-message"
-          style={showComponent ? {} : { display: "none" }}
+          style={showResponseMessages ? {} : { display: "none" }}
         >
           <div className="flex items-end">
             <div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
@@ -90,7 +90,7 @@ export default function Message() {
         <div className="mb-2 border-t-2 border-gray-200 px-4 pt-4 sm:mb-0">
           <div
             className="relative flex"
-            style={showComponent ? { display: "none" } : {}}
+            style={showResponseMessages ? { display: "none" } : {}}
           >
             <input
               type="text"
@@ -119,7 +119,7 @@ export default function Message() {
           <span style={{ color: "red" }}>{error}</span>
           <div
             className="relative flex"
-            style={showComponent ? {} : { display: "none" }}
+            style={correctEnglishMutation.data ? {} : { display: "none" }}
           >
             <div className="mx-auto content-center items-center justify-center sm:flex">
               <button
