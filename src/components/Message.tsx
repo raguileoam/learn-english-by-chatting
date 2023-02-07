@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 
 import { api } from "../utils/api";
+import { PulseLoader } from "react-spinners";
 
 export default function Message() {
   const [error, setError] = useState("");
@@ -11,6 +12,10 @@ export default function Message() {
   const randomQuestion = api.generateText.randomQuestion.useQuery({ text: "" });
 
   function correctEnglishOfMessage() {
+    if (!randomQuestion.data) {
+      setError("La pregunta generada está cargando");
+      return;
+    }
     if (messageInput === "") {
       setError("El texto no puede quedar en blanco");
       return;
@@ -117,6 +122,26 @@ export default function Message() {
             </div>
           </div>
           <span style={{ color: "red" }}>{error}</span>
+
+          <div
+            className="relative flex"
+            style={
+              showResponseMessages && !correctEnglishMutation.data
+                ? {}
+                : { display: "none" }
+            }
+          >
+            <div className="mx-auto content-center items-center justify-center sm:flex">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
+                disabled
+              >
+                <PulseLoader color="#ffffff" size={10} />
+              </button>
+            </div>
+          </div>
+
           <div
             className="relative flex"
             style={correctEnglishMutation.data ? {} : { display: "none" }}
