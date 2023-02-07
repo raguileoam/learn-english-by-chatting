@@ -47,6 +47,7 @@ export default function Message() {
         <div
           id="messages"
           className="scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch flex flex-col space-y-4 overflow-y-auto p-3"
+          style={{ width: "500px" }}
         >
           <div className="chat-message">
             <div className="flex items-end">
