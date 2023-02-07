@@ -3,6 +3,7 @@ import { ChangeEvent, useState } from "react";
 import { api } from "../utils/api";
 
 export default function Message() {
+  const [error, setError] = useState("");
   const [showComponent, setShowComponent] = useState(false);
   const [messageInput, setMessageInput] = useState("");
   const [messageSend, setMessageSend] = useState("");
@@ -10,6 +11,10 @@ export default function Message() {
   const randomQuestion = api.generateText.randomQuestion.useQuery({ text: "" });
 
   function correctEnglishOfMessage() {
+    if (messageInput === "") {
+      setError("El texto no puede quedar en blanco");
+      return;
+    }
     setMessageSend(messageInput);
     setShowComponent(true);
     setMessageInput("");
@@ -20,6 +25,11 @@ export default function Message() {
 
   function handleInputChange(evt: ChangeEvent<HTMLInputElement>): void {
     setMessageInput(evt.target.value);
+    if (!evt.target.value || evt.target.value === "") {
+      setError("El texto no puede quedar en blanco");
+      return;
+    }
+    setError("");
   }
 
   function refreshPage() {
@@ -95,7 +105,6 @@ export default function Message() {
                 className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
                 onClick={correctEnglishOfMessage}
               >
-                <span className="font-bold">Send</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -107,6 +116,7 @@ export default function Message() {
               </button>
             </div>
           </div>
+          <span style={{ color: "red" }}>{error}</span>
           <div
             className="relative flex"
             style={showComponent ? {} : { display: "none" }}
