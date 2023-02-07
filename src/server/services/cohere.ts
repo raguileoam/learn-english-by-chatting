@@ -40,7 +40,7 @@ export function getPromptbyMessage(message: string) {
 }
 
 export function getQuestionPromp() {
-  return "Give me a common question in real life";
+  return "Give me a common question of real life";
 }
 
 export default async function cohereService(message: string) {
