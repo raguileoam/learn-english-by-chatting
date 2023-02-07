@@ -53,9 +53,11 @@ export default function Message() {
               <div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
                 <div>
                   <span className="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600">
-                    {randomQuestion.data
-                      ? randomQuestion.data.question
-                      : "Loading..."}
+                    {randomQuestion.data ? (
+                      randomQuestion.data.question
+                    ) : (
+                      <PulseLoader color="#000000" size={8} />
+                    )}
                   </span>
                 </div>
               </div>
@@ -84,9 +86,11 @@ export default function Message() {
             <div className="order-2 mx-2 flex max-w-xs flex-col items-start space-y-2 text-xs">
               <div>
                 <span className="inline-block rounded-lg rounded-bl-none bg-gray-300 px-4 py-2 text-gray-600">
-                  {correctEnglishMutation.data
-                    ? correctEnglishMutation.data.greeting
-                    : "Loading..."}
+                  {correctEnglishMutation.data ? (
+                    correctEnglishMutation.data.greeting
+                  ) : (
+                    <PulseLoader color="#000000" size={8} />
+                  )}
                 </span>
               </div>
             </div>
@@ -130,17 +134,7 @@ export default function Message() {
                 ? {}
                 : { display: "none" }
             }
-          >
-            <div className="mx-auto content-center items-center justify-center sm:flex">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-4 py-3 text-white transition duration-500 ease-in-out hover:bg-blue-400 focus:outline-none"
-                disabled
-              >
-                <PulseLoader color="#ffffff" size={10} />
-              </button>
-            </div>
-          </div>
+          ></div>
 
           <div
             className="relative flex"
