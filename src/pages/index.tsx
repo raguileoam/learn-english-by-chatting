@@ -17,7 +17,10 @@ const Home: NextPage = () => {
             Learn <span className="text-[hsl(280,100%,70%)]">English</span> by
             Chatting
           </h1>
-
+          <p className="text-white">
+            App que permite practicar a como responder ante preguntas comunes en
+            Inglés.
+          </p>
           <Message></Message>
         </div>
       </main>
