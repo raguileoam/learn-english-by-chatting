@@ -9,8 +9,12 @@ export default function Message() {
   const [messageInput, setMessageInput] = useState("");
   const [messageSend, setMessageSend] = useState("");
   const correctEnglishMutation = api.generateText.correctEnglish.useMutation();
-  const randomQuestion = api.generateText.randomQuestion.useQuery({ text: "" });
-
+  const randomQuestion = api.generateText.randomQuestion.useQuery(
+    {
+      text: "",
+    },
+    { refetchOnWindowFocus: false }
+  );
   function correctEnglishOfMessage() {
     if (!randomQuestion.data) {
       setError("La pregunta generada está cargando");
